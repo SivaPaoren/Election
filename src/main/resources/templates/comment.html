@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>Bug Election</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- mobile specific metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+
+    <link rel="stylesheet" href="css/base.css" th:href="@{/css/base.css}">
+    <link rel="stylesheet" href="css/vendor.css" th:href="@{/css/vendor.css}">
+    <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}">
+
+    <!-- script
+    ================================================== -->
+    <script src="js/modernizr.js" th:src="@{/js/modernizr.js}"></script>
+    <script src="js/pace.min.js" th:src="@{/js/pace.min.js}"></script>
+
+    <!-- favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="favicon.ico" th:href="@{/images/favicon.ico}"type="image/x-icon">
+    <link rel="icon" href="favicon.ico" th:href="@{/images/favicon.ico}" type="image/x-icon">
+
+</head>
+
+<body id="top">
+
+    <!-- pageheader
+    ================================================== -->
+    <section class="s-pageheader s-pageheader--home">
+
+        <header class="header">
+            <div class="header__content row">
+
+                <ul class="header__social">
+                    <li>
+                        <a href="#0"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                    </li>
+                </ul> <!-- end header__social -->
+
+                <a class="header__search-trigger" href="#0"></a>
+
+                <div class="header__search">
+
+                    <form role="search" method="get" class="header__search-form" action="#">
+                        <label>
+                            <span class="hide-content">Search for:</span>
+                            <input type="search" class="search-field" placeholder="Type Keywords" value="" name="s" title="Search for:" autocomplete="off">
+                        </label>
+                        <input type="submit" class="search-submit" value="Search">
+                    </form>
+
+                    <a href="#0" title="Close Search" class="header__overlay-close">Close</a>
+
+                </div>  <!-- end header__search -->
+
+
+                <a class="header__toggle-menu" href="#0" title="Menu"><span>Menu</span></a>
+
+                <nav class="header__nav-wrap">
+
+                    <h2 class="header__nav-heading h6">Site Navigation</h2>
+
+                    <ul class="header__nav">
+                        <li><a href="#" th:href="@{/home}">Home</a></li>
+                        <li class="current"><a href="#">Vote</a></li>
+                        <li><a href="about.html" th:href="@{/about}">About</a></li>
+                          
+                       
+			          
+		                     <li><a href="#" th:href="@{/logout}">Sign out</a></li>
+		              
+                    </ul> <!-- end header__nav -->
+
+                    <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
+
+                </nav> <!-- end header__nav-wrap -->
+
+            </div> <!-- header-content -->
+        </header> <!-- header -->
+  </section>
+    <!-- s-content
+    ================================================== -->
+    <section class="s-content s-content--narrow s-content--no-padding-bottom">
+        <!-- comments
+        ================================================== -->
+        <div class="comments-wrap">
+
+            <div id="comments" class="row">
+                <div class="col-full">
+                   <!-- If comment is null or not is check here -->
+                  
+                   
+                    <h3 class="h2" th:text="${totalComment+' Comments'}"></h3>
+                              
+                    <!-- commentlist -->
+                    <ol class="commentlist" th:each="comment:${comments}">
+
+                        <li class="depth-1 comment">
+
+                            <div class="comment__avatar">
+                                <img width="50" height="50" class="avatar" src="images/avatars/user-01.jpg" alt="">
+                            </div>
+
+                            <div class="comment__content">
+
+                                <div class="comment__info">
+                                <!-- Name of the user will appear here who comment -->
+                                    <cite th:text="${comment.username}"></cite>
+
+                                    <div class="comment__meta">
+                                    
+                                    <!-- Month date , year and time will be display -->
+                                        <time class="comment__time" th:text="${comment.month+' '+comment.date+', '+comment.year+' @ '+comment.time}">Dec 16, 2017 @ 23:05</time>
+                                       
+                                    </div>
+                                </div>
+
+                                <div class="comment__text">
+                                 <!-- Comment will appear here -->
+                                <p th:text="${comment.text}"></p>
+                                
+                                </div>
+
+                            </div>
+
+                        </li> <!-- end comment level 1 -->
+                    </ol> <!-- end commentlist -->
+
+                    <!-- respond
+                    ================================================== -->
+                    <div class="respond">
+
+                        <h3 class="h2">Add Comment</h3>
+
+                        <form name="contactForm" id="contactForm" method="POST" th:action="@{/getComment}" th:object="${Comment}">
+                            <fieldset>
+
+                                <div class="message form-field">
+                                    <textarea name="text" id="cMessage" class="full-width" placeholder="Your Message"></textarea>
+                                </div>
+
+                                <button type="submit" class="submit btn--primary btn--large full-width">Comment</button>
+
+                            </fieldset>
+                        </form> <!-- end form -->
+
+                    </div> <!-- end respond -->
+
+                </div> <!-- end col-full -->
+
+            </div> <!-- end row comments -->
+        </div> <!-- end comments-wrap -->
+
+    </section> <!-- s-content -->
+
+   
+
+
+
+
+    <!-- s-footer
+    ================================================== -->
+<footer class="s-footer">
+
+        <div class="s-footer__main">
+            <div class="row">
+
+                <div class="col-two md-four mob-full s-footer__sitelinks">
+
+                    <h4>Quick Links</h4>
+
+                    <ul class="s-footer__linklist">
+                        <li><a href="@{/home}" target="_new">Home</a></li>
+                        <li><a href="/index" target="_new">Vote</a></li>
+                        <li><a href="/about" target="_new">About</a></li>
+                       
+                    </ul>
+
+                </div> <!-- end s-footer__sitelinks -->
+                <div class="col-two md-four mob-full s-footer__social">
+
+                    <h4>Social</h4>
+
+                    <ul class="s-footer__linklist">
+                        <li><a href="https://www.facebook.com/profile.php?id=100006291100741" target="_new">Facebook</a></li>
+                        <li><a href="https://www.instagram.com/gyrusclothin/" target="_new">Instagram</a></li>
+                        <li><a href="https://www.linkedin.com/in/siva-poaral-a4b3a01b0/" target="_new">LinkedIn</a></li>
+                    </ul>
+
+                </div> <!-- end s-footer__social -->
+
+                <div class="col-five md-full end s-footer__subscribe">
+
+                    <h4>Newsletter</h4>
+
+                    <p>You can subscribe to our website to obtain more details about the web application.</p>
+
+                    <div class="subscribe-form">
+                        <form id="mc-form" class="group" novalidate="true" action="#">
+
+                            <input type="text" value="" name="email" class="email" id="mc-email" placeholder="Email Address" required>
+							
+                            <input type="submit" name="subscribe" value="Send">
+
+                            <label for="mc-email" class="subscribe-message"></label>
+
+                        </form>
+                    </div>
+
+                </div> <!-- end s-footer__subscribe -->
+
+            </div>
+        </div> <!-- end s-footer__main -->
+
+        <div class="s-footer__bottom">
+            <div class="row">
+                <div class="col-full">
+                    <div class="s-footer__copyright">
+                        <span>© Copyright Philosophy 2018</span>
+                        <span>Site Template by <a href="https://colorlib.com/">Colorlib</a></span>
+                    </div>
+
+                    <div class="go-top">
+                        <a class="smoothscroll" title="Back to Top" href="#top"></a>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end s-footer__bottom -->
+
+    </footer> <!-- end s-footer -->
+
+
+    <!-- preloader
+    ================================================== -->
+    <div id="preloader">
+        <div id="loader">
+            <div class="line-scale">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Java Script
+    ================================================== -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>

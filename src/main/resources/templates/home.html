@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>Bug Election</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- mobile specific metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+
+    <link rel="stylesheet" href="css/base.css" th:href="@{/css/base.css}">
+    <link rel="stylesheet" href="css/vendor.css" th:href="@{/css/vendor.css}">
+    <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}">
+
+    <!-- script
+    ================================================== -->
+    <script src="js/modernizr.js" th:src="@{/js/modernizr.js}"></script>
+    <script src="js/pace.min.js" th:src="@{/js/pace.min.js}"></script>
+
+    <!-- favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="favicon.ico" th:href="@{/images/favicon.ico}"type="image/x-icon">
+    <link rel="icon" href="favicon.ico" th:href="@{/images/favicon.ico}" type="image/x-icon">
+
+</head>
+
+<body id="top">
+
+    <!-- pageheader
+    ================================================== -->
+    <section class="s-pageheader s-pageheader--home">
+
+      <header class="header">
+          <div class="header__content row">
+
+              <ul class="header__social">
+                  <li>
+                      <a href="#0"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                  </li>
+                  <li>
+                      <a href="#0"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                  </li>
+                  <li>
+                      <a href="#0"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                  </li>
+                  <li>
+                      <a href="#0"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                  </li>
+              </ul> <!-- end header__social -->
+
+              <a class="header__search-trigger" href="#0"></a>
+
+              <div class="header__search">
+
+                  <form role="search" method="get" class="header__search-form" action="#">
+                      <label>
+                          <span class="hide-content">Search for:</span>
+                          <input type="search" class="search-field" placeholder="Type Keywords" value="" name="s" title="Search for:" autocomplete="off">
+                      </label>
+                      <input type="submit" class="search-submit" value="Search">
+                  </form>
+
+                  <a href="#0" title="Close Search" class="header__overlay-close">Close</a>
+
+              </div>  <!-- end header__search -->
+
+
+              <a class="header__toggle-menu" href="#0" title="Menu"><span>Menu</span></a>
+
+              <nav class="header__nav-wrap">
+
+                  <h2 class="header__nav-heading h6">Site Navigation</h2>
+
+                  <ul class="header__nav">
+                    <li class="current"><a href="#">Home</a></li>
+                    <li><a href="#" th:href="@{/index}">Vote</a></li>
+                    <li><a href="#" th:href="@{/about}">About</a></li>
+                      
+                      
+                      
+                      <th:block th:if="${status.active==true}">
+		                     <li><a href="#" th:href="@{/logout}">Sign out</a></li>
+		             </th:block> 
+		             
+                      <th:block th:if="${status.active==false}">
+                            <li><a href="#" th:href="@{/Login}">Sign in</a></li>
+		                    <li><a href="#" th:href="@{/Register}">Sign up</a></li>
+                     </th:block>
+		                    
+		                   
+		                    
+                   
+                  </ul> <!-- end header__nav -->
+
+                  <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
+
+              </nav> <!-- end header__nav-wrap -->
+
+          </div> <!-- header-content -->
+      </header> <!-- header -->
+
+
+
+         <div class="pageheader-content row">
+            <div class="col-full">
+
+                <div class="featured">
+
+                    <div class="featured__column featured__column--large">
+                        <div class="entry" style="background-image:url('images/thumbs/featured/votePhoto.png');">
+
+                            <div class="entry__content">
+                                <span class="entry__category"><a href="#">Election 2020</a></span>
+
+                                <h1><a href="@{/index}" title="">Vote Now</a></h1>
+                            </div> <!-- end entry__content -->
+
+                        </div> <!-- end entry -->
+                    </div> <!-- end featured__big -->
+                </div> <!-- end featured -->
+
+            </div> <!-- end col-full -->
+        </div> <!-- end pageheader-content row -->
+    </section> <!-- end s-pageheader -->
+
+    <!-- Java Script
+    ================================================== -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>Bug Election</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- mobile specific metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+
+    <link rel="stylesheet" href="css/base.css" th:href="@{/css/base.css}">
+    <link rel="stylesheet" href="css/vendor.css" th:href="@{/css/vendor.css}">
+    <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}">
+
+        <style type="text/css" media="screen">
+        .s-styles {
+            background: #f2f2f2;
+            padding-top: 12rem;
+            padding-bottom: 12rem;
+        }
+
+        .s-styles .section-intro h1 {
+            margin-top: 0;
+        }
+     </style>
+
+    <!-- script
+    ================================================== -->
+    <script src="js/modernizr.js" th:src="@{/js/modernizr.js}"></script>
+    <script src="js/pace.min.js" th:src="@{/js/pace.min.js}"></script>
+
+    <!-- favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="favicon.ico" th:href="@{/images/favicon.ico}"type="image/x-icon">
+    <link rel="icon" href="favicon.ico" th:href="@{/images/favicon.ico}" type="image/x-icon">
+
+</head>
+
+<body id="top">
+
+    <!-- pageheader
+    ================================================== -->
+    <div class="s-pageheader">
+
+        <header class="header">
+            <div class="header__content row">
+
+
+                <ul class="header__social">
+                    <li>
+                        <a href="#0"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                    </li>
+                </ul> <!-- end header__social -->
+
+                <a class="header__search-trigger" href="#0"></a>
+
+                <div class="header__search">
+
+                    <form role="search" method="get" class="header__search-form" action="#">
+                        <label>
+                            <span class="hide-content">Search for:</span>
+                            <input type="search" class="search-field" placeholder="Type Keywords" value="" name="s" title="Search for:" autocomplete="off">
+                        </label>
+                        <input type="submit" class="search-submit" value="Search">
+                    </form>
+
+                    <a href="#0" title="Close Search" class="header__overlay-close">Close</a>
+
+                </div>  <!-- end header__search -->
+
+
+                <a class="header__toggle-menu" href="#0" title="Menu"><span>Menu</span></a>
+
+                <nav class="header__nav-wrap">
+
+                    <h2 class="header__nav-heading h6">More</h2>
+
+                    <ul class="header__nav">
+                        <li><a href="#" th:href="@{/home}">Home</a></li>
+                        <li><a href="#" th:href="@{/index}">Vote</a></li>
+                        <li><a href="#" th:href="@{/about}">About</a></li>
+                        <li class="current"><a href="#">Sign in</a></li>
+                        <li><a href="#" th:href="@{/Register}">Sign up</a></li>
+                    </ul> <!-- end header__nav -->
+
+                    <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
+
+                </nav> <!-- end header__nav-wrap -->
+
+            </div> <!-- header-content -->
+        </header> <!-- header -->
+
+    </div> <!-- end s-pageheader -->
+
+
+    <!-- styles
+    ================================================== -->
+    <section id="styles" class="s-content s-content--narrow">
+        <div class="row">
+
+            <div class="col-full">
+                
+                <h3 class="add-bottom">Sign in</h3>
+                       <!-- this link comes after sign up to login again and shows userName -->
+		                <div class="tab-full" th:if="${afterSignUp}">
+			                <div  class="alert-box--success">
+			                    <p>
+			                       <i th:text="${'Now Login to Vote'}"></i><br/>
+			                    </p>
+			                 
+			                    
+			                </div>
+		
+		                </div>
+		                
+		                <!-- Display Invalid login message -->
+		                <div class="tab-full" th:if="${param.error}">
+			                <div  class="alert-box--error">
+			                    <p>
+			                       <Strong th:text="${'Invalid User name or Password'}"></Strong><br/>
+			                    </p>
+			                 
+			                    
+			                </div>
+		
+		                </div>
+
+                <form action="#" th:action="@{/Login}" method="POST" >
+                    <div>
+                        <label for="sampleInput">User name</label>
+                        <input class="full-width" type="text" placeholder="Adam" id="username" name="username" required th:value="${username}"> 
+                    </div>
+                    <div>
+                        <label for="sampleInput2">Password</label>
+                        <input class="full-width" type="password" placeholder="" id="password" name="password" required>
+                    </div>
+                    <label class="add-bottom">
+                        <input type="checkbox">
+                        <span class="label-text">Remember me</span>
+                    </label>
+
+                    <input class="btn--primary full-width" type="submit" value="Sign in">
+
+                </form>
+                <p>New user?<a href="#" th:href="@{/Register}">Register here</a></p>
+
+            </div>
+
+        </div> <!-- end row -->
+
+    </section> <!-- end styles -->
+
+
+    <!-- s-extra
+    ================================================== -->
+
+    <!-- s-footer
+    ================================================== -->
+ <footer class="s-footer">
+
+        <div class="s-footer__main">
+            <div class="row">
+
+                <div class="col-two md-four mob-full s-footer__sitelinks">
+
+                    <h4>Quick Links</h4>
+
+                    <ul class="s-footer__linklist">
+                        <li><a href="@{/home}" target="_new">Home</a></li>
+                        <li><a href="/index" target="_new">Vote</a></li>
+                        <li><a href="/about" target="_new">About</a></li>
+                       
+                    </ul>
+
+                </div> <!-- end s-footer__sitelinks -->
+                <div class="col-two md-four mob-full s-footer__social">
+
+                    <h4>Social</h4>
+
+                    <ul class="s-footer__linklist">
+                        <li><a href="https://www.facebook.com/profile.php?id=100006291100741" target="_new">Facebook</a></li>
+                        <li><a href="https://www.instagram.com/gyrusclothin/" target="_new">Instagram</a></li>
+                        <li><a href="https://www.linkedin.com/in/siva-poaral-a4b3a01b0/" target="_new">LinkedIn</a></li>
+                    </ul>
+
+                </div> <!-- end s-footer__social -->
+
+                <div class="col-five md-full end s-footer__subscribe">
+
+                    <h4>Newsletter</h4>
+
+                    <p>You can subscribe to our website to obtain more details about the web application.</p>
+
+                   <div class="subscribe-form">
+                        <form id="mc-form" class="group" novalidate="true" action="#">
+
+                            <input type="text" value="" name="email" class="email" id="mc-email" placeholder="Email Address" required="">
+							
+                            <input type="submit" name="subscribe" value="Send">
+
+                            <label for="mc-email" class="subscribe-message"></label>
+
+                        </form>
+                    </div>
+
+                </div> <!-- end s-footer__subscribe -->
+
+            </div>
+        </div> <!-- end s-footer__main -->
+
+        <div class="s-footer__bottom">
+            <div class="row">
+                <div class="col-full">
+                    <div class="s-footer__copyright">
+                        <span>© Copyright Philosophy 2018</span>
+                        <span>Site Template by <a href="https://colorlib.com/">Colorlib</a></span>
+                    </div>
+
+                    <div class="go-top">
+                        <a class="smoothscroll" title="Back to Top" href="#top"></a>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end s-footer__bottom -->
+
+    </footer> <!-- end s-footer -->
+ 
+
+    <!-- preloader
+    ================================================== -->
+    <div id="preloader">
+        <div id="loader">
+            <div class="line-scale">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Java Script
+    ================================================== -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
