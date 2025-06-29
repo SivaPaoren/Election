@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.election.dao.commentRepository;
 import com.election.model.Comment;
 import com.election.service.electionService;
 import com.election.service.voteService;
@@ -21,6 +22,9 @@ public class PageController {
 	@Autowired
 	private voteService voteService;
 	
+	@Autowired
+    private commentRepository commentRepo;
+
 	
 	@GetMapping("/")
 	public String landing(Model model,Principal prin) {
@@ -64,13 +68,14 @@ public class PageController {
    		List<Comment> list = electionService.getLastFiveComments();
    		if(list==null||list.size()==0) {
    			model.addAttribute("commentCondition", false);
-   		}
+		} else {
+            model.addAttribute("commentCondition", true);
+        }
    	    //total number of comments
-		int totalComment = electionService.totalComment;
+		long totalComment = commentRepo.count(); // Get count directly from repository
 		
 		model.addAttribute("totalComment", totalComment);
-   		model.addAttribute("commentCondition", true);
-   		electionService.CommentManager(model);
+		electionService.CommentManager(model); // This already adds the comments list
          
        	  return "index";
      }
