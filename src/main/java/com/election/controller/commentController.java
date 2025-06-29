@@ -23,7 +23,7 @@ public class commentController {
     private PageController mainController;
     
     @Autowired
-    private electionService elctionService; 
+    private electionService electionService;
     
 	//comments will be saved here
      @PostMapping(value="/getComment")
@@ -44,11 +44,11 @@ public class commentController {
 		}
 		
 		//total number of comments
-		int totalComment = elctionService.totalComment;
+		long totalComment = commentRepo.count(); // Get count directly from repository
 		
 		model.addAttribute("totalComment", totalComment);
 		model.addAttribute("commentCondition", true);
-		elctionService.CommentManager(model);
+		electionService.CommentManager(model); // This adds the comments list to the model
 		return mainController.callIndex(model, prin);
 	}
      
@@ -57,7 +57,7 @@ public class commentController {
      @GetMapping("/moreComments")
      public String moreComment(Model model) {
     	 //total comments goes from here
-    	 int totalComment = electionService.totalComment;
+	 long totalComment = commentRepo.count(); // Get count directly from repository
    		 model.addAttribute("totalComment", totalComment);
    		 
    		 

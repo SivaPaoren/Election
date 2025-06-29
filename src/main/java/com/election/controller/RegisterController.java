@@ -2,7 +2,7 @@ package com.election.controller;
 
 import java.security.Principal;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,9 +29,6 @@ public class RegisterController {
 	  @Autowired
 	  private electionService elecService;
 	  
-	  @Autowired
-	  private active active;
-	
 	    @GetMapping("/Register")
 	    public String callLogoutPage(Model model) {
 	    	model.addAttribute("userCheck",false);
@@ -47,9 +44,7 @@ public class RegisterController {
 	    @PostMapping("/Register")
 	    public String performRegister(Civilian civilian,Model model,Principal prin,HttpServletRequest req) {
 	    	//check if the user name can be used or not
-	    	active = new active();
-	    	active.setActive(true);
-	    	//ModelAndView mv = new ModelAndView();
+		//ModelAndView mv = new ModelAndView(); // This was commented out and is unused
 	    	String name = civilian.getName();
 	    
 	    	boolean flag = elecService.availableOrNot(name);

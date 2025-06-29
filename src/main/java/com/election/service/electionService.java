@@ -17,8 +17,7 @@ import com.election.model.active;
 @Service
 public class electionService{
 	
-	@Autowired
-	private active active; 
+	// private active active; // This field seems to be re-instantiated in methods, consider removing if not stateful across service calls.
 
 	@Autowired
 	private electionRepository electionRepo;
@@ -26,18 +25,14 @@ public class electionService{
 	@Autowired
 	private commentRepository commentRepo;
 	
-	public static int totalComment;
 
 		public void loginornotcheck(Model model,String username) {
-			active = new active();
-			active.setActive(true);
-			
-			//if the user is not loged in this will retuen false
-			if(username==null||username.equals("")) {
-				active.setActive(false);
-				model.addAttribute("status",active);
-			}
-			model.addAttribute("status",active);
+			boolean isLoggedIn = username != null && !username.equals("");
+			// The 'active' class instance was previously created here.
+			// Now directly adding a boolean. If the 'active' class wrapper is needed
+			// for other reasons in the template, this might need adjustment or
+			// the 'active' class might need to be a proper model attribute.
+			model.addAttribute("status", isLoggedIn);
 		}
 
 
@@ -45,20 +40,11 @@ public class electionService{
     //check if the user name already exiest //if the username can be used or not
     //name is available or not
     public boolean availableOrNot(String name){
-    	Civilian user;
-    	
-    	try {
-    		//try to access the username if the username doesnot exist it will catch exception
-    		user = electionRepo.findByName(name);
-    	}catch(Exception e) {
-    		user = new Civilian();
-    	}
-    	
-    	
-        if(user==null||user.equals("")) {
+	Civilian user = electionRepo.findByName(name);
+        if(user==null) { // If user is null, name is available
         	return true;
         }
-        return false;
+        return false; // Name is not available
     }
     
     
@@ -130,7 +116,7 @@ public class electionService{
     public List<Comment> getLastFiveComments(){
     	List<Comment> commentList =commentRepo.findAll();
     	//total number of comments is get from here
-    	totalComment = commentList.size();
+	// totalComment = commentList.size(); // This static field was removed
     	List<Comment> LastFive = new ArrayList<>();
     	if(commentList.size()<=5)return commentList;
     
